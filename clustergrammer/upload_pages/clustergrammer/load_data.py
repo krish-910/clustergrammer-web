@@ -1,7 +1,7 @@
 def load_file(net, filename):
-  import StringIO
+  import io
   f = open(filename, 'r')
-  buff = StringIO.StringIO(f.read())
+  buff = io.BytesIO(f.read())
   f.close()
   net.load_tsv_to_net(buff)
 

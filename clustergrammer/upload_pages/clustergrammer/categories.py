@@ -1,5 +1,5 @@
+'''
 def check_categories(lines):
-  ''' find out how many row and col categories are available ''' 
   # count the number of row categories
   rcat_line = lines[0].split('\t')
 
@@ -27,6 +27,27 @@ def check_categories(lines):
   num_labels['col'] = num_cc + 1
 
   return num_labels
+
+'''
+
+def check_categories(lines):
+    num_rc = 0
+    num_cc = 0
+
+    # Count the number of row categories
+    rcat_line = lines[0].split('\t')
+    num_rc = len(rcat_line) - 1
+    print(num_rc)
+    print("Hello")
+
+    # Count the number of column categories
+    for line in lines[1:]:
+        ccat_line = line.split('\t')
+        if ccat_line[0] != '':
+            num_cc += 1
+
+    num_labels = {'row': max(num_rc, 1), 'col': max(num_cc, 1)}
+    return num_labels
 
 def dict_cat(net):
   ''' make a dictionary of node-category associations ''' 

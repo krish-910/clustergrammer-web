@@ -3387,7 +3387,7 @@ var Clustergrammer =
     row_labels.insert('rect').style('opacity', 0);
 
     // append row label text
-    row_labels.append('text').attr('y', params.viz.rect_height * 0.5 + params.labels.default_fs_row * 0.35).attr('text-anchor', 'end').style('font-size', params.labels.default_fs_row + 'px').text(function (d) {
+    row_labels.append('a').attr('xlink:href', function(d) { return 'https://example.com/' + d.name; }).append('text').attr('y', params.viz.rect_height * 0.5 + params.labels.default_fs_row * 0.35).attr('text-anchor', 'end').style('font-size', params.labels.default_fs_row + 'px').text(function (d) {
       return utils.normal_name(d);
     }).attr('pointer-events', 'none').style('opacity', 0).style('cursor', 'default').transition().delay(text_delay).duration(text_delay).style('opacity', 1);
 

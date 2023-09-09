@@ -15358,9 +15358,27 @@ var Clustergrammer =
 	  row_labels.insert('rect').style('opacity', 0);
 
 	  // append row label text
-	  row_labels.append('text').attr('y', params.viz.rect_height * 0.5 + params.labels.default_fs_row * 0.35).attr('text-anchor', 'end').style('font-size', params.labels.default_fs_row + 'px').text(function (d) {
+	  row_labels.append('a').attr('href', function(d) { 
+		// Check if d.name contains a protocol (http or https)
+		if (/^https?:\/\//.test(d.name)) {
+			const decodedName = decodeURIComponent(d.name.replace(/&period;/g, '.'));
+			return decodedName; // d.name already contains the protocol
+		} else {
+			// Use the current page's protocol as the default (http or https)
+			const timestamp = d.name.split('/')[0]
+			const cleanedName = d.name.split('/')[1].replace(/&period;/g, '');
+			const currentProtocol = 'http://web.archive.org/web/'
+			print(timestamp)
+			print(cleanedName)
+			print(currentProtocol)
+			return currentProtocol + timestamp + cleanedName;
+	  	}	}).attr('target', '_blank').append('text').attr('y', params.viz.rect_height * 0.5 + params.labels.default_fs_row * 0.35).attr('text-anchor', 'end').style('font-size', params.labels.default_fs_row + 'px').text(function (d) {
 	    return utils.normal_name(d);
-	  }).attr('pointer-events', 'none').style('opacity', 0).style('cursor', 'default').transition().delay(text_delay).duration(text_delay).style('opacity', 1);
+	  }).attr('pointer-events', 'auto').style('opacity', 0).style('cursor', 'default').on('click', function(d) {
+		// handle the click event here
+		//console.log('Text clicked:', d.name);
+		window.open(d.name, '_blank');
+	  }).transition().delay(text_delay).duration(text_delay).style('opacity', 1);
 
 	  // change the size of the highlighting rects
 	  row_labels.each(function () {

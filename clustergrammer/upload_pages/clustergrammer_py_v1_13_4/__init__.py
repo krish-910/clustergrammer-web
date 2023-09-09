@@ -64,6 +64,7 @@ class Network(object):
     This will load a TSV matrix file buffer; this is exposed so that it will
     be possible to load data without having to read from a file.
     '''
+    # Pass the bytes-like object to the function
     load_data.load_tsv_to_net(self, file_buffer, filename)
 
   def load_vect_post_to_net(self, vect_post):

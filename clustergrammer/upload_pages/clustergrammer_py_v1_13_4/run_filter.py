@@ -71,7 +71,7 @@ def grab_df_subset(df, keep_rows='all', keep_cols='all'):
   if keep_cols != 'all':
     df = df[keep_cols]
   if keep_rows != 'all':
-    df = df.ix[keep_rows]
+    df = df.loc[keep_rows]
   return df
 
 def get_sorted_rows(df, rank_type='sum'):

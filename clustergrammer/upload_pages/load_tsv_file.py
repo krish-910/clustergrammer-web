@@ -10,15 +10,16 @@ def main( buff, inst_filename, mongo_address, viz_id, req_sim_mat=False,
   import json
 
   # Clustergrammer-PY 5-30-2017 1.13.4 release
-  from clustergrammer_py_v1_13_4 import Network
-
-  import StringIO
+  from clustergrammer.upload_pages.clustergrammer_py_v1_13_4 import Network
+  #from clustergrammer import Network
+  import io
 
   client = MongoClient(mongo_address)
   db = client.clustergrammer
   fs = gridfs.GridFS(db)
 
   viz_id = ObjectId(viz_id)
+  
   found_viz = db.networks.find_one({'_id':viz_id})
 
   print('in load_tsv_file ' + inst_filename)
@@ -44,7 +45,7 @@ def main( buff, inst_filename, mongo_address, viz_id, req_sim_mat=False,
   export_dat['dat'] = net.export_net_json('dat')
   export_dat['source'] = 'user_upload'
 
-  dat_id = db.network_data.insert(export_dat, check_keys=False)
+  dat_id = db.network_data.insert_one(export_dat)
 
   update_viz = net.viz
   update_dat = dat_id
@@ -66,10 +67,10 @@ def main( buff, inst_filename, mongo_address, viz_id, req_sim_mat=False,
 
   if req_sim_mat:
 
-    sim_row_id = db.networks.insert(update_sim_row, check_keys=False)
+    sim_row_id = db.networks.insert_one(update_sim_row).inserted_id
     found_viz['sim_row'] = sim_row_id
 
-    sim_col_id = db.networks.insert(update_sim_col, check_keys=False)
+    sim_col_id = db.networks.insert_one(update_sim_col).inserted_id
     found_viz['sim_col'] = sim_col_id
 
     # do not directly save sim_row and sim_col to net, save them separately
@@ -79,8 +80,8 @@ def main( buff, inst_filename, mongo_address, viz_id, req_sim_mat=False,
 
   try:
     print('updating document ' + inst_filename)
-    db.networks.update_one( {'_id':viz_id}, {'$set': found_viz} )
-
+    #db.networks.update_one( {'_id':viz_id}, {'$set': found_viz} )
+    db.networks.update_one({'_id': found_viz['_id']}, {'$set': {'viz': found_viz['viz']}})
   except:
 
     # save viz structure using gridfs

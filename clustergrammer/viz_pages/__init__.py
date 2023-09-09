@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect
-import viz_functions as viz_fun
+from clustergrammer.viz_pages import viz_functions as viz_fun
 
 def add_routes(app=None, mongo_address=None):
 

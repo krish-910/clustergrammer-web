@@ -1,8 +1,8 @@
 from flask import Blueprint
-from flask.ext.cors import cross_origin
+from flask_cors import cross_origin
 
-import Enrichr_clustergram_endpoint as enr_clust_endpoint
-import vector_upload_endpoint, load_tsv_endpoint, get_viz_json_endpoint
+from clustergrammer.upload_pages import Enrichr_clustergram_endpoint as enr_clust_endpoint
+from clustergrammer.upload_pages import vector_upload_endpoint, load_tsv_endpoint, get_viz_json_endpoint
 
 def add_routes(app=None, mongo_address=None):
 
@@ -28,7 +28,7 @@ def add_routes(app=None, mongo_address=None):
   @upload_pages.route(app.config['ENTRY_POINT'] + '/upload_network/', methods=['POST'])
   @cross_origin()
   def upload_network():
-    return load_tsv_endpoint.main(mongo_address, response_type='redirect', req_sim_mat=True)
+    return load_tsv_endpoint.main(mongo_address, response_type='redirect', req_sim_mat=False)
 
   @upload_pages.route(app.config['ENTRY_POINT'] + '/test_sim_mat', methods=['POST'])
   @cross_origin()

@@ -5,11 +5,7 @@ from . import categories
 from . import proc_df_labels
 from . import data_formats
 from . import make_unique_labels
-
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
+from io import StringIO
 
 def load_file(net, filename):
   # reset network when loaing file, prevents errors when loading new file
@@ -50,7 +46,7 @@ def load_stdin(net):
   for line in sys.stdin:
     data = data + line
 
-  data = StringIO.StringIO(data)
+  data = io.StringIO(data)
 
   net.load_tsv_to_net(data)
 
@@ -65,24 +61,36 @@ def sanitize_index(ind):
     return ind
 
 def load_tsv_to_net(net, file_buffer, filename=None):
-  lines = file_buffer.getvalue().split('\n')
-  num_labels = categories.check_categories(lines)
 
+  # if isinstance(file_buffer, bytes):
+  #   file_buffer = file_buffer.decode()  # Decode the bytes object to a string
+
+  # if isinstance(file_buffer, str):
+  #   lines = file_buffer.split('\n')  # Split the string into lines
+  # else:
+  #   lines = file_buffer.readlines()  # Read lines from the file buffer
+  lines = file_buffer.readlines()
+  num_labels = categories.check_categories(lines)
   row_arr = list(range(num_labels['row']))
   col_arr = list(range(num_labels['col']))
   tmp_df = {}
 
+  # Convert the list of lines back to a single string
+  data_string = ''.join(lines)
+
+  # Create a new StringIO object using the data string
+  file_buffer1 = StringIO(data_string)
+
   # use header if there are col categories
   if len(col_arr) > 1:
-    tmp_df['mat'] = pd.read_table(file_buffer, index_col=row_arr,
-                                  header=col_arr)
+    tmp_df['mat'] = pd.read_table(file_buffer1, index_col=0, header=0)
   else:
-    tmp_df['mat'] = pd.read_table(file_buffer, index_col=row_arr)
+    tmp_df['mat'] = pd.read_table(file_buffer1, index_col=row_arr)
 
   tmp_df['mat'].index = [sanitize_index(ind) for ind in tmp_df['mat'].index]
   tmp_df['mat'].columns = [sanitize_index(ind) for ind in tmp_df['mat'].columns]
   tmp_df = proc_df_labels.main(tmp_df)
-
+  
   net.df_to_dat(tmp_df, True)
   net.dat['filename'] = filename
 

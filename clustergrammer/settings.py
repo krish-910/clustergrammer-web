@@ -5,7 +5,8 @@ try:
 except:
   pass
 
-MONGODB = os.environ.get('MONGODB', '146.203.54.131')
+# MONGODB = os.environ.get('MONGODB', '146.203.54.131')
+MONGODB = os.environ.get('MONGODB', 'mongodb://localhost:27017')
 ORIGIN = os.environ.get('ORIGIN', 'https://amp.pharm.mssm.edu')
 ENTRY_POINT = os.environ.get('ENTRY_POINT', '/clustergrammer')
 HARMONIZOME_URL = os.environ.get('HARMONIZOME_URL', ORIGIN+'/Harmonizome')

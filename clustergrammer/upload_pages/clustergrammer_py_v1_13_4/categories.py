@@ -1,40 +1,59 @@
+# def check_categories(lines):
+#   '''
+#   find out how many row and col categories are available
+#   '''
+#   # count the number of row categories
+#   rcat_line = lines[0].split('\t')
+
+#   # calc the number of row names and categories
+#   num_rc = 0
+#   found_end = False
+
+#   # skip first tab
+#   for inst_string in rcat_line[1:]:
+#     if inst_string == '':
+#       if found_end is False:
+#         num_rc = num_rc + 1
+#     else:
+#       found_end = True
+
+#   max_rcat = 15
+#   if max_rcat > len(lines):
+#     max_rcat = len(lines) - 1
+
+#   num_cc = 0
+#   for i in range(max_rcat):
+#     ccat_line = lines[i + 1].split('\t')
+
+#     # make sure that line has length greater than one to prevent false cats from
+#     # trailing new lines at end of matrix
+#     if ccat_line[0] == '' and len(ccat_line) > 1:
+#       num_cc = num_cc + 1
+
+#   num_labels = {}
+#   num_labels['row'] = num_rc + 1
+#   num_labels['col'] = num_cc + 1
+
+#   return num_labels
+
+
 def check_categories(lines):
-  '''
-  find out how many row and col categories are available
-  '''
-  # count the number of row categories
-  rcat_line = lines[0].split('\t')
+    num_rc = 0
+    num_cc = 0
 
-  # calc the number of row names and categories
-  num_rc = 0
-  found_end = False
+    # Count the number of row categories
+    rcat_line = lines[0].split('\t')
+    num_rc = len(rcat_line) - 1
 
-  # skip first tab
-  for inst_string in rcat_line[1:]:
-    if inst_string == '':
-      if found_end is False:
-        num_rc = num_rc + 1
-    else:
-      found_end = True
+    # Count the number of column categories
+    for line in lines[1:]:
+        ccat_line = line.split('\t')
+        if ccat_line[0] != '':
+            num_cc += 1
 
-  max_rcat = 15
-  if max_rcat > len(lines):
-    max_rcat = len(lines) - 1
+    num_labels = {'row': max(num_rc, 1), 'col': max(num_cc, 1)}
+    return num_labels
 
-  num_cc = 0
-  for i in range(max_rcat):
-    ccat_line = lines[i + 1].split('\t')
-
-    # make sure that line has length greater than one to prevent false cats from
-    # trailing new lines at end of matrix
-    if ccat_line[0] == '' and len(ccat_line) > 1:
-      num_cc = num_cc + 1
-
-  num_labels = {}
-  num_labels['row'] = num_rc + 1
-  num_labels['col'] = num_cc + 1
-
-  return num_labels
 
 def dict_cat(net, define_cat_colors=False):
   '''

@@ -1,6 +1,7 @@
 def main(mongo_address, response_type='redirect', req_sim_mat=False):
   from flask import request
-  import StringIO
+  import io
+  from io import StringIO
   import threading
   import time
 
@@ -19,7 +20,7 @@ def main(mongo_address, response_type='redirect', req_sim_mat=False):
       linkage_type = 'average'
 
     req_file = request.files['file']
-    buff = StringIO.StringIO(req_file.read())
+    buff = io.StringIO(req_file.read().decode())
     inst_filename = req_file.filename
 
     if allowed_file(inst_filename):
@@ -32,7 +33,7 @@ def main(mongo_address, response_type='redirect', req_sim_mat=False):
 
         time.sleep(1)
 
-        if thread.isAlive() == False:
+        if thread.is_alive() == False:
 
           return make_response(viz_id, inst_filename, response_type=response_type, req_sim_mat=req_sim_mat)
 
@@ -51,7 +52,7 @@ def start_upload(mongo_address, inst_filename, buff, req_sim_mat=False,
 
   from pymongo import MongoClient
   import threading
-  import load_tsv_file
+  from clustergrammer.upload_pages import load_tsv_file
 
   client = MongoClient(mongo_address)
   db = client.clustergrammer
@@ -63,8 +64,9 @@ def start_upload(mongo_address, inst_filename, buff, req_sim_mat=False,
   export_viz['source'] = 'user_upload'
 
   # get the id that will be used to update the placeholder
-  viz_id = db.networks.insert( export_viz )
-  viz_id = str(viz_id)
+  viz_id = db.networks.insert_one( export_viz )
+  viz_id = str(viz_id.inserted_id)
+  #viz_id = str(viz_id)
 
   client.close()
 

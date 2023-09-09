@@ -11,6 +11,7 @@ def main(net, df=None):
   # rows
   #############
   rows = df.index.tolist()
+
   if type(rows[0]) is str:
 
     if len(rows) != len(list(set(rows))):

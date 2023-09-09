@@ -7,6 +7,7 @@ import json
 def get_network_from_mongo(user_objid, mongo_address):
   client = MongoClient(mongo_address)
   db = client.clustergrammer
+  print(db)
   fs = gridfs.GridFS(db)
 
   try:
@@ -50,17 +51,18 @@ def get_network_from_mongo(user_objid, mongo_address):
 
 def render_page(net, page_route, mat_type='clust'):
   if net != 'error':
-
     # render sim_mats page
     if page_route == 'viz_sim_mats.html':
 
       viz_id = str(net['_id'])
 
       return render_template(page_route, viz_network=net['viz'],
-        viz_name=net['name'], viz_sim_row=net['sim_row'],
-        viz_sim_col=net['sim_col'], viz_id=viz_id,
-        config=current_app.config)
-
+         viz_name=net['name'], viz_id=viz_id,
+         config=current_app.config)
+      # return render_template(page_route, viz_network=net['viz'],
+      #   viz_name=net['name'], viz_sim_row=net['sim_row'],
+      #   viz_sim_col=net['sim_col'], viz_id=viz_id,
+      #   config=current_app.config)
     # render viz page
     else:
 

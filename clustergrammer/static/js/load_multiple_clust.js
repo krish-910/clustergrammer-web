@@ -6,10 +6,10 @@ resize_container();
 
 var hzome = ini_hzome();
 
-function load_multiple_clust(network_data, network_sim_row, network_sim_col,
+function load_multiple_clust(network_data,
   viz_id, viz_name){
 
-  make_clust(network_data, make_sim_mats, network_sim_row, network_sim_col);
+  make_clust(network_data);
 
 }
 
@@ -36,7 +36,7 @@ var default_args = {};
   default_args.matrix_update_callback = matrix_update_callback;
   default_args.dendro_callback = dendro_callback;
 
-function make_clust(network_data, make_sim_mats, network_sim_row, network_sim_col){
+function make_clust(network_data){
 
   var args = $.extend(true, {}, default_args);
   args.root = '#container-id-1';

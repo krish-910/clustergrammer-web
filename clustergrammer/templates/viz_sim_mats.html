@@ -125,15 +125,15 @@
 
   <script>
 
-    var network_data = {{ viz_network|tojson|safe }};
-    var network_sim_row = {{ viz_sim_row|tojson|safe }};
-    var network_sim_col = {{ viz_sim_col|tojson|safe }};
+    var network_data = { viz_networ,tojson,safe };
+    var network_sim_row = { viz_sim_row,tojson,safe };
+    var network_sim_col = { viz_sim_col,tojson,safe };
 
-    var viz_name = {{viz_name|tojson|safe}};
+    var viz_name = { viz_name,tojson,safe};
 
-    var viz_id = {{viz_id|tojson|safe}};
+    var viz_id = {viz_id,tojson,safe};
 
-    load_multiple_clust(network_data, network_sim_row, network_sim_col, viz_id, viz_name);
+    load_multiple_clust(network_data, viz_id, viz_name);
 
   </script>
 </body>
