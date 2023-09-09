@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="noindex">
+    <base href='{{ config["ENTRY_POINT"] }}/'>
+
+    <title>Clustergrammer</title>
+
+    <link rel="shortcut icon" href="static/icons/graham_cracker.ico"  type="image/x-icon">
+
+    <link rel="stylesheet" href="static/lib/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/jquery-ui.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/custom_new.css">
+
+    {% include "ga.html" %}
+</head>
+
+<body>
+
+  <!-- visualization will be put here -->
+  <div id='container-id-1'>
+      <h1 class='wait_message'>Please wait ...</h1>
+  </div>
+
+  <footer id='footer_div' class="footer navbar-fixed-bottom">
+
+    <div class='container'>
+      <div class="row" >
+        <div class="col-xs-12 footer_section">
+          <p class="text-muted text-center footer_text" style="margin-bottom: 5px">
+            <a href="https://github.com/MaayanLab/clustergrammer">Clustergrammer</a> is being developed by the <a href="http://icahn.mssm.edu/research/labs/maayan-laboratory">Ma'ayan Lab</a> at the <a href="http://icahn.mssm.edu/">Icahn School of Medicine at Mount Sinai</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Required JS Libraries -->
+  <script src="static/lib/js/d3.js"></script>
+  <script src="static/lib/js/jquery-1.11.2.min.js"></script>
+  <script src="static/lib/js/jquery-ui.js"></script>
+  <script src="static/lib/js/bootstrap.min.js"></script>
+  <script src="static/lib/js/underscore-min.js"></script>
+
+  <!-- Configuration -->
+  {% include "config.html" %}
+
+  <!-- clustergram.js -->
+  <script src='static/js/clustergrammer.v1.19.4.js'></script>
+
+  <!-- latest optional modules  -->
+  <script src='static/js/Enrichrgram.js'></script>
+  <script src='static/js/hzome_functions.js'></script>
+  <script src='static/js/send_to_Enrichr.js'></script>
+
+  <script src='static/js/load_viz_new.js'></script>
+
+  <script>
+
+    network_data = {{ viz_network|tojson|safe }};
+
+    viz_name = {{viz_name|tojson|safe}};
+
+    load_viz_new(network_data);
+
+  </script>
+
+</body>
+
+</html>

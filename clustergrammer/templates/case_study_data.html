@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href='{{ config["ENTRY_POINT"] }}/'>
+
+    <title>Clustergrammer</title>
+
+    <!-- <link rel="shortcut icon" href="static/map-o_32_transparent.ico"  type="image/x-icon"> -->
+    <link rel="shortcut icon" href="static/icons/graham_cracker.ico"  type="image/x-icon">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="static/lib/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/lib/css/bootstrap-switch.css">
+    <link rel="stylesheet" href="static/css/specific.css" />
+    <link rel="stylesheet" href="static/css/custom_index.css">
+    <link rel="stylesheet" href="static/lib/css/prettify.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+
+    <style>
+      #input_form {display: none}
+    </style>
+
+    {% include "ga.html" %}
+</head>
+
+<body onload="prettyPrint()">
+
+  <!-- Wrap all page content here -->
+  <div id="wrap" class='toggled' style='width: 1000px;'>
+
+      <!-- main container - required -->
+      <div id='main_container'>
+
+        <!-- this row is - required fluid causes problems -->
+        <div class="row" >
+
+          <!-- start example row -->
+          <div id=''>
+
+            <h2 class=initial_paragraph style='font-size: 40px; margin-top: 20px; border-bottom:1px solid #DEDEDE'>Clustergrammer Case Study Datasets </h2>
+
+            <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px; margin-bottom: 10'>Lung Cancer PTM/Expression Data</h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>The <a href="http://clustergrammer.readthedocs.io/clustergrammer_widget.html">Clustergrammer-Widget</a> was used to analyze lung cancer regulation at the post-translational modification (PTM) and gene expression levels (see <a href="http://nbviewer.jupyter.org/github/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/CST_Data_Viz.ipynb?flush_cache=true" target='_blank'>Notebook</a>). PTM data was obtained from our collaborators at <a href="https://www.cellsignal.com/" target='_blank'>Cell Signaling Technology Inc</a>.</p>
+
+            <ul class='initial_paragraph' style='margin-top: 5px;'>
+
+              <li>
+                Primary CST PTM Data: <a href="static/case_study_data/CST/CST_primary_data.zip" download="CST_primary_data.zip">CST_primary_data.zip (7.3 MB)</a>
+              </li>
+
+              <li>
+                Processed CST Data Ratios: <a href="static/case_study_data/CST/ptm45_none.txt" download="ptm45_none.txt">ptm45_none.txt (3.3 MB)</a>
+              </li>
+              <p>Processed using <a href="https://github.com/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/process_latest_cst_data.py">process_latest_cst_data.py</a>.</p>
+
+              <li>
+                Processed CST Data Ratios Quantile Normalized and common cell lines: <a href="static/case_study_data/CST/ptmCCLE_col-iqn.txt" download="ptmCCLE_col-iqn.txt">ptmCCLE_col-iqn.txt (2.8 MB)</a>
+              </li>
+              <p>Processed using <a href="https://github.com/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/improved_quantile_normalization.py">improved_quantile_normalization.py</a> and used by <a href="http://nbviewer.jupyter.org/github/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/CST_Data_Processing.ipynb">CST_Data_Processing.ipynb</a>.</p>
+
+              <li>
+                CCLE Lung Expression (all lung cell lines): <a href="static/case_study_data/CST/CCLE_lung.txt" download="CCLE_lung.txt">CCLE_lung.txt (31.5 MB)</a>
+              </li>
+
+              <li>
+                CCLE Lung Expression common cell lines: <a href="static/case_study_data/CST/CCLE_CST_lung.txt" download="CCLE_CST_lung.txt">CCLE_CST_lung.txt (6.3 MB)</a>
+              </li>
+              <p>Processed using <a href="https://github.com/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/get_orig_CCLE_lung.py">get_orig_CCLE_lung.py</a> and used by <a href="http://nbviewer.jupyter.org/github/MaayanLab/CST_Lung_Cancer_Viz/blob/master/notebooks/CST_Data_Processing.ipynb">CST_Data_Processing.ipynb</a>.</p>
+
+            </ul>
+
+            <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px;'>Single-Cell CyTOF Data</h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>The <a href="http://clustergrammer.readthedocs.io/clustergrammer_widget.html">Clustergrammer-Widget</a> was used to analyze the phosphorylation response of peripheral blood mononuclear cells (PBMCs) to PMA (phorbol 12-myristate 13-acetate). See <a href="http://nbviewer.jupyter.org/github/MaayanLab/Cytof_Plasma_PMA/blob/master/notebooks/Plasma_vs_PMA_Phosphorylation.ipynb">notebook</a>. CyTOF data obtained from our collaborators at the <a href="http://icahn.mssm.edu/research/portal/resources/deans-cores/human-immune-monitoring-core" target='_blank'>Icahn School of Medicine Human Immune Monitoring Core</a>.</p>
+
+            <ul class='initial_paragraph' style='margin-top: 5px;'>
+
+              <li>
+                Primary Data: <a href="static/case_study_data/CyTOF/Plasma.txt" download="Plasma.txt">Plasma.txt (90 MB)</a> and <a href="static/case_study_data/CyTOF/PMA.txt" download="PMA.txt">PMA.txt (72 MB)</a>
+              </li>
+
+              <p>Processed using <a href="https://github.com/MaayanLab/Cytof_Plasma_PMA/blob/master/precalc_cytof.py">precalc_cytof.py</a> and used by <a href="http://nbviewer.jupyter.org/github/MaayanLab/Cytof_Plasma_PMA/blob/master/notebooks/Plasma_vs_PMA_Phosphorylation.ipynb">Plasma_vs_PMA_Phosphorylation.ipynb</a>. </p>
+
+            </ul>
+
+            <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px;'>CCLE Explorer </h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>Clustergrammer was used to re-analyze the <a href="https://software.broadinstitute.org/software/cprg/?q=node/11" target='_blank'>Cancer Cell Line Encyclopedia's</a> (CCLE) gene expression data and enable tissue-specific exploration with the <a href="https://maayanlab.github.io/CCLE_Clustergrammer/" target='_blank'>CCLE Explorer</a>. Also see the corresponding <a href="">Clustergrammer CCLE Jupyter Notebook</a>. </p>
+
+            <ul class='initial_paragraph' style='margin-top: 5px;'>
+
+              <li>
+                Primary Data: <a href="static/case_study_data/CCLE/CCLE_Expression_Entrez_2012-09-29.gct" download="CCLE_Expression_Entrez_2012-09-29.gct">CCLE_Expression_Entrez_2012-09-29.gct (175 MB)</a>
+              </li>
+
+              <li>
+                Sample Information (meta-data): <a href="static/case_study_data/CCLE/CCLE_sample_info_file_2012-10-18.txt" download="CCLE_sample_info_file_2012-10-18.txt">CCLE_sample_info_file_2012-10-18.txt (201 KB)</a>
+              </li>
+
+              <li>
+                Clustergrammer-Format Processed Data: <a href="static/case_study_data/CCLE/CCLE.txt" download="CCLE_sample_info_file_2012-10-18.txt">CCLE.txt (175 MB)</a>
+              </li>
+              <p>Processed using <a href="https://github.com/MaayanLab/CCLE_Clustergrammer/blob/master/notebooks/process_CCLE.py">process_CCLE.py</a> and used by <a href="http://nbviewer.jupyter.org/github/MaayanLab/CCLE_Clustergrammer/blob/master/notebooks/Calculate_CCLE_Tissue_Heatmaps.ipynb">Calculate_CCLE_Tissue_Heatmaps.ipynb</a> to generate the <a href="https://maayanlab.github.io/CCLE_Clustergrammer/">Clustergrammer CCLE Explorer.</a></p>
+
+            </ul>
+
+            <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px;'>Kinase-Substrate Similarity Network</h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>The <a href="" target='_blank'>Kinase Substrate Similarity Network</a> uses Clustergrammer to visualize a large network of kinases based on shared substrates. Data obtained from the <a href="{{ config['HARMONIZOME_URL'] }}/dataset/KEA+Substrates+of+Kinases" target='_blank'>Harmonizome</a>.</p>
+
+
+            <ul class='initial_paragraph' style='margin-top: 5px;'>
+
+              <li>
+                Primary Data: <a href="static/case_study_data/kinase_network/kinase_network_based_on_substrates.txt" download="kinase_network_based_on_substrates.txt">kinase_network_based_on_substrates.txt (609 KB)</a>
+              </li>
+              <p>Kinase-substrate data obtained from the <a href="{{ config['HARMONIZOME_URL'] }}/dataset/KEA+Substrates+of+Kinases" target='_blank'>Harmonizome</a>.</p>
+
+              <li>
+                Kinase Information (meta-data): <a href="static/case_study_data/kinase_network/Uniprot_kinases_processed.txt" download="Uniprot_kinases_processed.txt">Uniprot_kinases_processed.txt (7 KB)</a>
+              </li>
+              <p>Kinase meta-data obtained from <a href="http://www.uniprot.org/">Uniprot</a></p>
+
+            </ul>
+
+<!--             <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px;'>MNIST Handwritten Digits</h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>The <a href="http://clustergrammer.readthedocs.io/clustergrammer_widget.html">Clustergrammer-Widget</a> was used to visualize the MNIST handwritten digit dataset (see <a href="http://nbviewer.jupyter.org/github/MaayanLab/MNIST_heatmaps/blob/master/notebooks/MNIST_Notebook.ipynb" target='_blank'>Notebook</a>). K-means downsampling was used to visualize the entire MNIST dataset as a single heatmap.</p>
+
+
+            <h2 class=initial_paragraph style='font-size: 32px; margin-top: 25px;'>Iris Dataset</h2>
+
+            <p class='initial_paragraph first_instructions' style='margin-bottom: 20px;'>The <a href="http://clustergrammer.readthedocs.io/clustergrammer_widget.html">Clustergrammer-Widget</a> was used to visualize the popular the Iris flower dataset. See the <a href="http://nbviewer.jupyter.org/github/MaayanLab/iris_clustergrammer_visualization/blob/master/Iris%20Dataset.ipynb" target='_blank'>Clustergrammer Iris Jupyter Notebook</a>.</p> -->
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+            <!-- end row -->
+
+
+          </div>
+
+
+        </div>
+        <!-- end row -->
+
+
+      </div>
+      <!-- end main container -->
+
+  </div>
+  <!-- End Wrap all page content here -->
+
+  <div id='footer'>
+    <div class="row" >
+      <div id='footer_text_container' class="col-xs-12 footer_section">
+        <div class="text-muted footer_text">Clustergrammer is being developed by the <a class='blue_links' target="_blank"  href="http://icahn.mssm.edu/research/labs/maayan-laboratory">Ma'ayan Lab</a> at the <a class='blue_links' target="_blank"   href="http://icahn.mssm.edu/">Icahn School of Medicine at Mount Sinai</a>  for the <a target="_blank" href="http://lincs-dcic.org/">BD2K-LINCS DCIC</a> and the <a target="_blank" href="http://commonfund.nih.gov/idg/overview">KMC-IDG</a>  </div>
+
+        <!-- DCIC, BD2K, KMC, and GitHub -->
+        <div class="text-muted footer_text">
+        and is an open source project available on GitHub:
+        <a class='blue_links' target="_blank" href="https://github.com/MaayanLab/clustergrammer">Clustergrammer</a>,
+
+        <a class='blue_links' target="_blank" href="https://github.com/MaayanLab/clustergrammer-web">Clustergrammer-web</a>, and
+
+        <a class='blue_links' target="_blank" href="https://github.com/MaayanLab/clustergrammer-widget">Clustergrammer-widget</a>.
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="static/lib/js/jquery-1.11.2.min.js"></script>
+  <script src="static/lib/js/d3.js"></script>
+
+  <!-- <script src='static/lib/js/jquery.accordion.js'></script> -->
+  <!-- Bootstrap Core JavaScript -->
+  <script src="static/lib/js/bootstrap.min.js"></script>
+  <script src="static/lib/js/bootstrap-switch.min.js"></script>
+  <script src="static/lib/js/blockUI.js"></script>
+  <script src="static/lib/js/d3.js"></script>
+
+  <!-- stylized file upload button -->
+  <script type="text/javascript" src="static/lib/js/bootstrap.file-input.js"> </script>
+  <script type="text/javascript">
+    $('input[type=file]').bootstrapFileInput();
+    $('.file-inputs').bootstrapFileInput();
+  </script>
+  <script type="text/javascript" src="static/lib/js/prettify.js"> </script>
+
+  <script>
+
+    // display the upload button
+    d3.select('#input_form').style('display','block');
+
+    d3.select('#file_upload_button')
+      .on('click',function(){
+
+        if (!document.getElementById("InputFile").value) {
+
+            event.preventDefault();
+            alert("Please choose a file.");
+
+        } else {
+
+            // make wait sign
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '15px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .8,
+                color: '#fff'
+            } });
+
+            d3.select('.blockMsg').select('h1').text('Please wait...');
+        }
+
+    });
+
+    // d3.select('#new_button')
+    //   .on('click', function(){
+    //     console.log('clicking new button')
+    //   });
+
+  </script>
+</body>
+
